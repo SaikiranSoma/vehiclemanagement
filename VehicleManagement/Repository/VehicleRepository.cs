@@ -46,6 +46,7 @@ namespace VehicleManagement.Repository
         }
 
         public bool UpdateVehicle(int Id, VehicleDto vehicle)
+
         {
             var currentvehicle = _dbcontext.Vehicles.FirstOrDefault(x=>x.Id==Id);
             if (currentvehicle != null) 
