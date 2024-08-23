@@ -8,7 +8,7 @@ using VehicleManagement.Repository;
 
 namespace VehicleManagement.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class VehicleController : ControllerBase
@@ -24,13 +24,15 @@ namespace VehicleManagement.Controllers
         [HttpGet]
         public IActionResult GetAllVechiles()
         {
+            
             var result = _vehicleRepository.GetAllVehicles();
-            if (result != null)
+            if (result == null)
             {
                 return Ok(result);
             }
-            return BadRequest();
+            return Ok(result);
         }
+
 
         [HttpPost]
         public IActionResult AddVehicle([FromBody] VehicleDto vehicle)
@@ -72,11 +74,13 @@ namespace VehicleManagement.Controllers
         {
 
             var result=_vehicleRepository.GetVehicleById(Id);
-            if(result != null)
+            if(result == null)
             {
-                return Ok(result);
+                throw new NotImplementedException("dsfa");
             }
-            return NotFound($"Not found with id {Id}");
+            return Ok(result);
+
+
         }
     }
 }

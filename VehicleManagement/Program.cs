@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using VehicleManagement;
 using VehicleManagement.Data;
+using VehicleManagement.ExceptionHandlers;
 using VehicleManagement.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,9 +50,8 @@ builder.Services.AddDbContext<VehicleDbContext>(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-}
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+app.ConfigureExceptionHandler(logger);
 
 app.UseHttpsRedirection();
 
