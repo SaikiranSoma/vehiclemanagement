@@ -18,7 +18,8 @@ namespace TestVehicle
             _vehicles = new List<VehicleDto>()
             {
                 new VehicleDto() {Regno="Ts21",Model="Suv",Mfgdate= new DateTime(2020,12,12)},
-                new VehicleDto() {Regno="Ts08", Model="Sedan",Mfgdate =new DateTime(2024,08,23) }
+                new VehicleDto() {Regno="Ts08", Model="Sedan",Mfgdate =new DateTime(2024,08,23) },
+                new VehicleDto(){ Regno="Ts02",Model="Coupe",Mfgdate=new DateTime(2019,09,24)}
             };
         }
 
@@ -31,8 +32,14 @@ namespace TestVehicle
 
         public bool DeleteVehicle(int Id)
         {
-           _vehicles.Remove(GetVehicleById(Id));
-            return true;
+
+           var delteitem=GetVehicleById(Id);
+            if(delteitem != null)
+            {
+                _vehicles.Remove(delteitem);
+                return true;
+            }
+            return false;            
         }
 
         public IEnumerable<VehicleDto> GetAllVehicles()
@@ -42,13 +49,17 @@ namespace TestVehicle
 
         public VehicleDto GetVehicleById(int Id)
         {
-            var vehicle = _vehicles[Id];
+           var vehicle = _vehicles[Id];
             return vehicle;
         }
 
         public bool UpdateVehicle(int Id, VehicleDto vehicle)
         {
-            return true;
+            var tempvehicel = _vehicles[Id];
+            _vehicles[Id] = vehicle;
+            if (_vehicles[Id] != null)
+                return true;
+            return false;
         }
     }
 }

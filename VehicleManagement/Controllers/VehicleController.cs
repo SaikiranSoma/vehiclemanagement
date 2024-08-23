@@ -28,7 +28,7 @@ namespace VehicleManagement.Controllers
             var result = _vehicleRepository.GetAllVehicles();
             if (result == null)
             {
-                return Ok(result);
+                return NotFound();
             }
             return Ok(result);
         }
@@ -76,7 +76,7 @@ namespace VehicleManagement.Controllers
             var result=_vehicleRepository.GetVehicleById(Id);
             if(result == null)
             {
-                throw new NotImplementedException("dsfa");
+                return NotFound();
             }
             return Ok(result);
 
