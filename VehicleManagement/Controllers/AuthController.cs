@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using VehicleManagement.Models;
 namespace VehicleManagement.Controllers
 {
     [Route("api/[controller]")]
@@ -10,7 +10,6 @@ namespace VehicleManagement.Controllers
     {
 
         private readonly IJwtTokenManager _jwtTokenManager;
-
         public AuthController(IJwtTokenManager jwtTokenManager)
         {
             _jwtTokenManager = jwtTokenManager;
@@ -25,11 +24,8 @@ namespace VehicleManagement.Controllers
             {
                 var token = _jwtTokenManager.Authenticate(userCrediantials.username, userCrediantials.password);
                 return Ok(token);
-            }
-           
+            }           
             return Unauthorized();
-        }
-       
-        
+        }              
     }
 }

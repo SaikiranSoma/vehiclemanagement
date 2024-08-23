@@ -10,7 +10,7 @@ namespace VehicleManagement.Repository
         public bool AddVehicle(VehicleDto vehicle);
         public bool UpdateVehicle(int Id, VehicleDto vehicle);
         public bool DeleteVehicle(int Id);
-
-
+        public VehicleDto GetVehicleById(int Id);
+        
     }
 }

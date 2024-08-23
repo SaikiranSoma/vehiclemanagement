@@ -15,7 +15,7 @@ namespace VehicleManagement
         public string Authenticate(string username, string password)
         {
 
-            var key = _configuration.GetValue<string>("Jwt:Key");
+            var key = _configuration.GetValue<string>("JwtConfig:Key");
             var keybytes = Encoding.UTF8.GetBytes(key);
             var tokenhandler = new JwtSecurityTokenHandler();
 
@@ -31,9 +31,6 @@ namespace VehicleManagement
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(keybytes),
                     SecurityAlgorithms.HmacSha256Signature)
-
-
-
             };
 
             var token = tokenhandler.CreateToken(tokendescriptor);

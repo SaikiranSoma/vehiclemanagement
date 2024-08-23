@@ -75,5 +75,50 @@ namespace VehicleManagement.Repository
             return false;
         }
 
+
+       
+        public VehicleDto GetVehicleById(int Id)
+        {
+            var result = _dbcontext.Vehicles.FirstOrDefault(x => x.Id == Id);
+            if(result != null)
+            {
+                var output = new VehicleDto()
+                {
+                    Regno = result.Regno,
+                    Model = result.Model,
+                    Mfgdate = result.Mfgdate,
+
+
+                };
+                return output;
+            }
+            return null;
+           
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

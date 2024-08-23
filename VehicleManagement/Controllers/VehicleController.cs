@@ -43,16 +43,15 @@ namespace VehicleManagement.Controllers
             return BadRequest();
         }
 
-
         [HttpPut("{Id}")]
         public IActionResult UpdateVehicle([FromRoute]int Id,[FromBody] VehicleDto vehicle) 
         { 
             var result=_vehicleRepository.UpdateVehicle(Id,vehicle);
-            if(result!=null) 
+            if(result!=false) 
             {
                 return Ok("Vehicle Updated succesfully");
             }
-            return BadRequest("Vehicle Not Found with id");
+            return BadRequest($"Vehicle Not Found with id{Id}");
         }
 
         [HttpDelete("{Id}")]
@@ -64,6 +63,20 @@ namespace VehicleManagement.Controllers
                 return Ok("Vehicle Deleted Succesfully");
             }
             return BadRequest();
+        }
+
+
+        [HttpGet("{Id}")]
+
+        public IActionResult GetVehicleById(int Id) 
+        {
+
+            var result=_vehicleRepository.GetVehicleById(Id);
+            if(result != null)
+            {
+                return Ok(result);
+            }
+            return NotFound($"Not found with id {Id}");
         }
     }
 }
